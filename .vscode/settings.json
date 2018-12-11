@@ -1,0 +1,11 @@
+{
+    "workbench.colorTheme": "Dark (Molokai)",
+    "workbench.iconTheme": "eq-material-theme-icons-ocean",
+    "workbench.fontAliasing": "antialiased",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.pep8Enabled": true,
+    "python.linting.pep8Args": [
+        "--ignore=E501" 
+    ]
+}

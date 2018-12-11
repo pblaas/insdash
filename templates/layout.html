@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Insurgency::Sandstorm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link href="/static/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script src="/static/pace.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css?q=1542375103">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="icon" href="/static/favicon-32x32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/favicon-32x32.png" type="image/x-icon">
+    <script>
+        var hasScrollbar = function () {
+            // The Modern solution
+            if (typeof window.innerWidth === 'number')
+                return window.innerWidth > document.documentElement.clientWidth
+
+            // rootElem for quirksmode
+            var rootElem = document.documentElement || document.body
+
+            // Check overflow style property on body for fauxscrollbars
+            var overflowStyle
+
+            if (typeof rootElem.currentStyle !== 'undefined')
+                overflowStyle = rootElem.currentStyle.overflow
+
+            overflowStyle = overflowStyle || window.getComputedStyle(rootElem, '').overflow
+
+            // Also need to check the Y axis overflow
+            var overflowYStyle
+
+            if (typeof rootElem.currentStyle !== 'undefined')
+                overflowYStyle = rootElem.currentStyle.overflowY
+
+            overflowYStyle = overflowYStyle || window.getComputedStyle(rootElem, '').overflowY
+
+            var contentOverflows = rootElem.scrollHeight > rootElem.clientHeight
+            var overflowShown = /^(visible|auto)$/.test(overflowStyle) || /^(visible|auto)$/.test(overflowYStyle)
+            var alwaysShowScroll = overflowStyle === 'scroll' || overflowYStyle === 'scroll'
+
+            return (contentOverflows && overflowShown) || (alwaysShowScroll)
+        }
+    </script>
+
+    <script>
+        var counter = 30;
+
+        // COUNTDOWN METHOD.
+        window.setInterval(function () {
+            counter--;
+            if (counter >= 0) {
+                var span;
+                span = document.getElementById("cnt");
+                span.innerHTML = counter;
+            }
+            if (counter === 0) {
+                clearInterval(counter);
+            }
+
+        }, 1000);
+
+        window.setInterval('refresh()', 30000);
+
+        // REFRESH OR RELOAD PAGE.
+        function refresh() {
+            window.location.reload();
+        }
+    </script>
+
+</head>
+
+<body>
+    <header>
+        {% include 'includes/_navbar.html' %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+    </header>
+
+</body>
+
+</html>

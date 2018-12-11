@@ -1,0 +1,138 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="bgdefault">
+  {% if players %}
+  <div class="row playerinfo">
+    <div class="col-12">
+      <h4>Players</h4>
+    </div>
+    <div class="col-3">
+      <div class="playercap">Name</div>
+    </div>
+    <div class="col-2">
+      <div class="playercap">Score</div>
+    </div>
+    <div class="col-4">
+      <div class="playercap">Minutes online</div>
+    </div>
+    <div class="col-3">
+    </div>
+
+    {% for in in players %}
+    {% if players[loop.index-1]["score"] > 1000 %}
+    <div class="col-3">{{ players[loop.index-1]["name"] }} <span class="oi oi-droplet red"></span></div>
+    {% else %}
+    <div class="col-3">{{ players[loop.index-1]["name"] }}</div>
+    {% endif %}
+    <div class="col-2">{{ players[loop.index-1]["score"] }}</div>
+    <div class="col-4">{{ (players[loop.index-1]["duration"] / 60) | round | int }}</div>
+    <div class="col-3"></div>
+    {% endfor %}
+
+  </div>
+  {% endif %}
+  <div class="row serverinfo">
+    <div class="col-12">
+      <h4>Server</h4>
+    </div>
+    <div class="col-12">
+      <div class="row indent">
+        <div class="col-4 col-md-2 col-sm-4 col-lg-2">
+          Name
+        </div>
+        <div class="col-8 col-md-10 col-sm-8 col-lg-10">
+          {{ data["name"] }}
+        </div>
+      </div>
+    </div>
+    <div class="col-4 col-md-2 col-sm-4 col-lg-2">
+      <div class="col">
+        Mode
+      </div>
+      <div class="col">
+        Map
+      </div>
+      <div class="col">
+        Ping
+      </div>
+      <div class="col">
+        Players
+      </div>
+      <div class="col">
+        Password
+      </div>
+      <div class="col">
+        Ranked
+      </div>
+      <div class="col">
+        Connect
+      </div>
+      <div class="col">
+        Switch to RCON
+      </div>
+
+      <hr>
+    </div>
+    <div class="col-4 col-md-4 col-sm-4 col-lg-2">
+      <div class="col">
+        {{ data["keywords"].rsplit(',')[6].rsplit(':')[1] }}
+      </div>
+      <div class="col">
+        {{ data["map"] }}
+      </div>
+      <div class="col">
+        {{ data["_ping"] | round | int }}
+      </div>
+      <div class="col">
+        {{ data["players"] }} / {{ data["max_players"] }}
+      </div>
+      <div class="col">
+        {% if "true" in data["keywords"].rsplit(',')[7].rsplit(':')[1] %}
+        <span class="oi oi-lock-locked red"></span>
+        {% else %}
+        <span class="oi oi-lock-unlocked green"></span>
+        {% endif %}
+      </div>
+      <div class="col">
+        {% if "true" in data["keywords"].rsplit(',')[2].rsplit(':')[1] %}
+        <span class="oi oi-check green"></span>
+        {% else %}
+        <span class="oi oi-minus red"></span>
+        {% endif %}
+      </div>
+      <div class="col">
+        <a href="steam://connect/{{ addr[0] }}:{{ addr[1] }}"><span class="oi oi-bolt"></span> </a>
+      </div>
+      <div class="col">
+        <a href="/rcon/{{ ip }}"><span class="oi oi-cog"></span></a>
+      </div>
+    </div>
+
+    <div class="col-4 col-md-6 col-sm-4 col-lg-8">
+      {% if "Oilfield" in data["map"] %}
+      <img src="/static/refinery.jpg" class="responsive mapstyle">
+
+      {% elif "Town" in data["map"] %}
+      <img src="/static/hideout.jpg" class="responsive mapstyle">
+
+      {% elif "Farmhouse" in data["map"] %}
+      <img src="/static/farmhouse.jpg" class="responsive mapstyle">
+
+      {% elif "Precinct" in data["map"] %}
+      <img src="/static/precinct.jpg" class="responsive mapstyle">
+    
+      {% elif "Mountain" in data["map"] %}
+      <img src="/static/summit.jpg" class="responsive mapstyle">
+      
+      {% elif "Canyon" in data["map"] %}
+      <img src="/static/crossing.jpg" class="responsive mapstyle">
+      
+      {% endif %}
+    </div>
+
+    <div class="col-12 quote">
+      <span class="oi oi-double-quote-serif-left orange"></span> {{ quote }} <span class="oi oi-double-quote-serif-right orange"></span>
+    </div>
+  </div>
+
+  {% endblock %}

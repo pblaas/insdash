@@ -1,0 +1,94 @@
+{% extends 'widgetlayout.html' %}
+
+{% block body %}
+<div class="banner">
+
+    {% if "Oilfield" in data["map"] %}
+    <div class="banner refinery">
+    {% elif "Town" in data["map"] %}
+    <div class="banner hideout">
+    {% elif "Farmhouse" in data["map"] %}
+    <div class="banner farmhouse">
+    {% elif "Precinct" in data["map"] %}
+    <div class="banner precinct">
+    {% elif "Mountain" in data["map"] %}
+    <div class="banner summit">
+    {% elif "Canyon" in data["map"] %}
+    <div class="banner crossing">
+    {% else %}
+    <div class="banner fallback">
+    {% endif %}
+
+        <div class="bservername">
+            {{ data["name"] }}
+        </div>
+        <div class="bserverinfo">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                            Mode:
+                        </div>
+                        <div class="col-4">
+                            <div class="banner content">{{ data["keywords"].rsplit(',')[6].rsplit(':')[1] }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    {% if "true" in data["keywords"].rsplit(',')[2].rsplit(':')[1] %}
+                    Ranked: <span class="oi oi-check green"></span>
+                    {% else %}
+                    Ranked: <span class="oi oi-minus red"></span>
+                    {% endif %}
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                            Map:
+                        </div>
+                        <div class="col-4">
+                            <div class="banner content">{{ data["map"] }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    {% if "true" in data["keywords"].rsplit(',')[7].rsplit(':')[1] %}
+                    Password: <span class="oi oi-lock-locked red"></span>
+                    {% else %}
+                    Password: <span class="oi oi-lock-unlocked green"></span>
+                    {% endif %}
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                            Ping:
+                        </div>
+                        <div class="col-4">
+                            <div class="banner content">{{ data["_ping"] | round | int }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    Connect: <a href="steam://connect/{{ addr[0] }}:{{ addr[1] }}"><span class="oi oi-bolt"></span>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                            Players:
+                        </div>
+                        <div class="col-4">
+                            <div class="banner content"> {{ data["players"] }} / {{ data["max_players"] }}</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

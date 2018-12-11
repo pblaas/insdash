@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="bgdefault">
+        <div class="row">
+                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-4 col-md-4"><img src="/static/error-code.jpeg" style="opacity:0.5;filter:alpha(opacity=50);"
+                                class="responsive"></div>
+                <div class="col-sm-4 col-md-4"></div>
+        </div>
+
+
+        <div class="container">
+                <h4>Error</h4>
+                <div class="jumbotron error">
+                        <span class="oi oi-wrench"></span>  The application was unable to process your request due to: {{ error }}  <span class="oi oi-wrench"></span>
+                </div>
+        </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="bgdefault">
+
+    {% if not data %}
+    <div>
+        <div class="container">
+            <h4>Rcon</h4>
+            <div class="jumbotron about">
+
+                Basic RCON functionality for Insurgency Sandstorm servers.<br />
+                Usage:
+                <br />
+                /rcon/YOUR_INSSA_SERVERIPHERE
+                <br />
+                <hr>
+
+                <p> <span class="oi oi-warning red"></span> This is very basic RCON functionality. Make sure you
+                    understand the following:</p>
+                <li>If you don't trust this APP with your RCON pass, don't use it!</li>
+                <li>Your RCON password will be sent to the server hosting this app.</li>
+                <li>RCON communication is clear text; So from the app to your server.</li>
+                <li>If your RCON port is firewalled, this hosting server needs to be on the whitelist.</li>
+                </ul><br />
+                <hr>
+                Made with <span class="oi oi-heart red"></span> by Spec.<br />
+                Dutch Recon
+                <p>
+                    Running version: {{ version }}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+
+    {% if players %}
+    <div class="row playerinfo">
+        <div class="col-12">
+            <h4>Players</h4>
+        </div>
+
+        {% for in in players %}
+        <div class="col-md-12">
+            <form action="/rconengine" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" class="form-control" id="ip" name="ip" value="{{ ip }}">
+                        <input type="hidden" class="form-control" id="username" name="username" value="{{ players[loop.index-1]["name"] }}">
+                        {{ players[loop.index-1]["name"] }}
+                    </div>
+                    <div class="col rcon">
+                        <div>
+                            {% if request.cookies.get('rconpwd') %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm btn-block">Mutate</button>
+                            {% else %}
+                            <button type="submit" disabled="disabled" class="btn btn-outline-danger btn-sm btn-block disabled">No password</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="kick"
+                                checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                Kick
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col d-none d-md-block d-lg-block">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="ban5">
+                            <label class="form-check-label" for="gridRadios2">
+                                Ban 5 min.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col d-none d-md-block d-lg-block">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="ban30">
+                            <label class="form-check-label" for="gridRadios3">
+                                Ban 30 min.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col d-none d-md-block d-lg-block">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="PERMBAN">
+                            <label class="form-check-label" for="gridRadios4">
+                                PermBan!
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col d-none d-md-block d-lg-block">
+                        <select class="mr-sm-2" id="bkreason" name=bkreason>
+                            <option selected value="">No Reason</option>
+                            <option value="Non-Tactical">Non-Tactical</option>
+                            <option value="N00b">N00b</option>
+                            <option value="FriendlyFire">FriendlyFire</option>
+                            <option value="L@m3rz!">L@m3rz!</option>
+                            <option value="Because">Because</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% endif %}
+
+    <div class="row serverinfo">
+        <div class="col-12">
+            <h4>Server</h4>
+        </div>
+        <div class="col-12">
+            <div class="row indent">
+                <div class="col-4 col-md-2 col-sm-4 col-lg-2">
+                    Name
+                </div>
+                <div class="col-8 col-md-10 col-sm-8 col-lg-10">
+                    {{ data["name"] }}
+                </div>
+            </div>
+        </div>
+        <div class="col-4 col-md-2 col-sm-4 col-lg-2">
+            <div class="col">
+                Mode
+            </div>
+            <div class="col">
+                Map
+            </div>
+            <div class="col">
+                Scenario
+            </div>
+            <hr>
+        </div>
+        <div class="col-4 col-md-4 col-sm-4 col-lg-2">
+            <div class="col">
+                {{ data["keywords"].rsplit(',')[6].rsplit(':')[1] }}
+            </div>
+            <div class="col">
+                {{ data["map"] }}
+            </div>
+            <div class="col rcon">
+                <form action="/rconengine" method="POST">
+                    <div class="form-group">
+                        <select class="form-control" id="mapname" name="mapname">
+                            {% for i in maplist %}
+                            <option>{{ maplist[loop.index-1] }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" class="form-control" id="ip" name="ip" value="{{ ip }}">
+
+                    </div>
+
+                    <div>
+                        {% if request.cookies.get('rconpwd') %}
+                        <button type="submit" class="btn btn-outline-success btn-sm btn-block">Change</button>
+                        {% else %}
+                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No password</button>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="col rcon">
+                <h4>Admin chat</h4>
+
+                <form action="/rconengine" method="POST">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="ip" name="ip" value="{{ ip }}">
+                        <label for="adminhat">Message</label>
+                        <textarea class="form-control" id="adminchat" name="adminchat" rows="3"></textarea>
+                    </div>
+                    <div>
+                        {% if request.cookies.get('rconpwd') %}
+                        <button type="submit" class="btn btn-outline-success btn-sm btn-block">Send</button>
+                        {% else %}
+                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No password</button>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <hr />
+            <div class="col rcon">
+                <h4>Rcon config</h4>
+
+                <form action="/rconengine" method="POST">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="ip" name="ip" value="{{ ip }}">
+                        <label for="rconpassword">Rcon Password</label>
+                        <input type="password" class="form-control" id="rconpassword" name="rconpassword" placeholder="Password">
+                        <label for="rconport">Rcon Port</label>
+                        <input type="text" class="form-control" id="rconport" name="rconport" value="27015">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-outline-success btn-sm btn-block">Update</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col">
+
+                {% if request.cookies.get('rconpwd') %}
+                <div class="green">Pass provided</div>
+                {% else %}
+                <div class="red">No pass provided!</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-4 col-md-6 col-sm-4 col-lg-8">
+            {% if "Oilfield" in data["map"] %}
+            <img src="/static/refinery.jpg" class="responsive mapstyle">
+
+            {% elif "Town" in data["map"] %}
+            <img src="/static/hideout.jpg" class="responsive mapstyle">
+
+            {% elif "Farmhouse" in data["map"] %}
+            <img src="/static/farmhouse.jpg" class="responsive mapstyle">
+
+            {% elif "Precinct" in data["map"] %}
+            <img src="/static/precinct.jpg" class="responsive mapstyle">
+          
+            {% elif "Mountain" in data["map"] %}
+            <img src="/static/summit.jpg" class="responsive mapstyle">
+            
+            {% elif "Canyon" in data["map"] %}
+            <img src="/static/crossing.jpg" class="responsive mapstyle">
+            
+
+
+            {% endif %}
+        </div>
+
+
+
+        <div class="col-12 quote">
+            <span class="oi oi-double-quote-serif-left orange"></span> {{ quote }} <span class="oi oi-double-quote-serif-right orange"></span>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

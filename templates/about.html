@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="bgdefault">
+    <div>
+        <div class="container">
+            <h4>About</h4>
+            <div class="jumbotron about">
+                Activity dashboard for Insurgency Sandstorm servers.<br />
+                Usage:<br />
+
+                /r/YOUR_INSSA_SERVERIPHERE<br />
+                OR<br />
+                /r/YOUR_INSSA_SERVERIPHERE:PORT<br />
+                <br />
+                You can create a widget like this:<br />
+                /w/YOUR_INSSA_SERVERIPHERE<br />
+                <div>
+                    <i>iframe src="https://ins.vinite.eu/w/83.96.176.30" width=240px height=257px</i>
+                </div>
+                <br />
+                You can create a banner like this:<br />
+                /b/YOUR_INSSA_SERVERIPHERE<br />
+                <div>
+                    <i>iframe src="https://ins.vinite.eu/b/83.96.176.30" width=544px height=93px</i>
+                </div>
+                <hr>
+
+                Made with <span class="oi oi-heart red"></span> by Spec.<br />
+                Dutch Recon
+                <p>
+                    Running version: {{ version }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

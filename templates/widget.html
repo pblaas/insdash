@@ -1,0 +1,136 @@
+{% extends 'widgetlayout.html' %}
+
+{% block body %}
+
+<div class="widget">
+
+    {% if "Oilfield" in data["map"] %}
+    <div class="widget refinery">
+        {% elif "Town" in data["map"] %}
+        <div class="widget hideout">
+            {% elif "Farmhouse" in data["map"] %}
+            <div class="widget farmhouse">
+                {% elif "Precinct" in data["map"] %}
+                <div class="widget precinct">
+                    {% elif "Mountain" in data["map"] %}
+                    <div class="widget summit">
+                        {% elif "Canyon" in data["map"] %}
+                        <div class="widget crossing">
+                            {% else %}
+                            <div class="widget fallback">
+                                {% endif %}
+
+                                <div class="wservername">
+                                    {{ data["name"] }}
+                                </div>
+                                <div class="wserverinfo">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Mode:
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="widget content">
+                                                    {{ data["keywords"].rsplit(',')[6].rsplit(':')[1] }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Map:
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="widget content">
+                                                    {{ data["map"] }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Ping:
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="widget content">
+                                                    {{ data["_ping"] | round | int }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Players:
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="widget content">
+                                                    {{ data["players"] }} / {{ data["max_players"] }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        {% if "true" in data["keywords"].rsplit(',')[2].rsplit(':')[1] %}
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Ranked:
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="oi oi-check green"></span>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Ranked:
+                                            </div>
+                                            <div class="col-2"> <span class="oi oi-minus red"></span>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-12">
+                                        {% if "true" in data["keywords"].rsplit(',')[7].rsplit(':')[1] %}
+                                        <div class="row">
+                                            <div class="col-4">
+
+                                                Password:
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="oi oi-lock-locked red"></span>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Password:
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="oi oi-lock-unlocked green"></span>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Connect:
+                                            </div>
+                                            <div class="col-2"> <a href="steam://connect/{{ addr[0] }}:{{ addr[1] }}"><span
+                                                        class="oi oi-bolt"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% endblock %}
