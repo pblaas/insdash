@@ -13,7 +13,7 @@ import time
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "0.1.13"
+__version__ = "0.1.14"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "83.96.176.30"

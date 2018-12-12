@@ -255,6 +255,8 @@ h4 {
     max-height: 257px;
     font-size: 14px;
     font-weight: bold;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .wservername {
@@ -326,6 +328,8 @@ h4 {
     max-width: 544px;
     max-height: 93px;
     font-size: 10px;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .banner.content {
