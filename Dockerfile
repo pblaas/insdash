@@ -5,7 +5,7 @@ LABEL maintainer="patrick@kite4fun.nl"
 ENV SERVERIP 83.96.176.30
 
 RUN apk update \
-  && apk add gcc python-dev libc-dev libffi-dev openssl-dev
+  && apk add gcc python-dev libc-dev libffi-dev openssl-dev jpeg-dev zlib-dev freetype-dev
 
 COPY requirements.txt /
 RUN pip install -r requirements.txt && mkdir /app
