@@ -173,6 +173,11 @@ h4 {
     text-shadow: 3px 2px#000;
 }
 
+.captcha {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
 .playerinfo {
     background-image: linear-gradient(rgba(236, 155, 3, 0.4), rgba(236, 155, 3, 0.2));
     padding: 20px;

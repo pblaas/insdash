@@ -1,5 +1,7 @@
 from steam import game_servers as gs
 from flask import Flask, jsonify, request, render_template, url_for, flash, redirect, make_response
+from flask_session import Session
+from flask_session_captcha import FlaskSessionCaptcha
 from urllib2 import Request
 import valve.rcon
 import sys
@@ -8,12 +10,15 @@ import os
 import random
 import socket
 import time
+import uuid
+import logging
+
 
 # import the flask extension
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "0.1.14"
+__version__ = "1.0.0"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "83.96.176.30"
@@ -21,6 +26,15 @@ if "SERVERIP" not in os.environ:
 app = Flask(__name__)
 app.secret_key = 'sakdfjasldfkj38sfkjasdaskdf'
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
+app.config["SECRET_KEY"] = uuid.uuid4()
+app.config['CAPTCHA_ENABLE'] = True
+app.config['CAPTCHA_NUMERIC_DIGITS'] = 5
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+app.config['SESSION_TYPE'] = 'sqlalchemy'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+Session(app)
+captcha = FlaskSessionCaptcha(app)
 
 
 def randomQuote():
@@ -192,8 +206,9 @@ def rcon(ip):
 def rconengine():
 
     if request.method == 'POST':
+        res = make_response("")
+        if captcha.validate():
             # print(request.form)
-            res = make_response("")
             if request.form.get('rconpassword') or request.form.get('rconport'):
                 res.set_cookie("rconpwd", request.form.get('rconpassword'), 60 * 60)
                 res.set_cookie("rconport", request.form.get('rconport'), 60 * 60)
@@ -239,6 +254,10 @@ def rconengine():
                 except:
                     e = "Wrong password"
                     return render_template('error.html', error=e)
+            res.headers['location'] = url_for('rcon', ip=request.form['ip'])
+            return res, 302
+        else:
+            flash(u'Wrong Captcha code', 'danger')
             res.headers['location'] = url_for('rcon', ip=request.form['ip'])
             return res, 302
     return render_template('rcon.html')

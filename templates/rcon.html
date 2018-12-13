@@ -56,9 +56,13 @@
                             {% if request.cookies.get('rconpwd') %}
                             <button type="submit" class="btn btn-outline-danger btn-sm btn-block">Mutate</button>
                             {% else %}
-                            <button type="submit" disabled="disabled" class="btn btn-outline-danger btn-sm btn-block disabled">No password</button>
+                            <button type="submit" disabled="disabled" class="btn btn-outline-danger btn-sm btn-block disabled">No
+                                password</button>
                             {% endif %}
                         </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="captcha" placeholder="Enter Captcha">
                     </div>
                     <div class="col">
                         <div class="form-check">
@@ -136,6 +140,9 @@
             <div class="col">
                 Scenario
             </div>
+            <div class="col">
+                {{ captcha() }}
+            </div>
             <hr>
         </div>
         <div class="col-4 col-md-4 col-sm-4 col-lg-2">
@@ -159,9 +166,13 @@
 
                     <div>
                         {% if request.cookies.get('rconpwd') %}
+                        <div class="col captcha">
+                            <input type="text" name="captcha" placeholder="Captcha Code">
+                        </div>
                         <button type="submit" class="btn btn-outline-success btn-sm btn-block">Change</button>
                         {% else %}
-                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No password</button>
+                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No
+                            password</button>
                         {% endif %}
                     </div>
                 </form>
@@ -178,9 +189,13 @@
                     </div>
                     <div>
                         {% if request.cookies.get('rconpwd') %}
+                        <div class="col captcha">
+                            <input type="text" name="captcha" placeholder="Captcha Code">
+                        </div>
                         <button type="submit" class="btn btn-outline-success btn-sm btn-block">Send</button>
                         {% else %}
-                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No password</button>
+                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No
+                            password</button>
                         {% endif %}
                     </div>
                 </form>
@@ -198,6 +213,9 @@
                         <input type="text" class="form-control" id="rconport" name="rconport" value="27015">
                     </div>
                     <div>
+                        <div class="col captcha">
+                            <input type="text" name="captcha" placeholder="Captcha Code">
+                        </div>
                         <button type="submit" class="btn btn-outline-success btn-sm btn-block">Update</button>
                     </div>
                 </form>
@@ -225,13 +243,13 @@
 
             {% elif "Precinct" in data["map"] %}
             <img src="/static/precinct.jpg" class="responsive mapstyle">
-          
+
             {% elif "Mountain" in data["map"] %}
             <img src="/static/summit.jpg" class="responsive mapstyle">
-            
+
             {% elif "Canyon" in data["map"] %}
             <img src="/static/crossing.jpg" class="responsive mapstyle">
-            
+
 
 
             {% endif %}
