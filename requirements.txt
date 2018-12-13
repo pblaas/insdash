@@ -3,5 +3,6 @@ python-valve
 Flask
 Flask-Caching
 flask-session-captcha
-flask-session
-flask-sqlalchemy
+Flask-Session
+Flask-SQLAlchemy
+SQLAlchemy
