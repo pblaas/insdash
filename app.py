@@ -18,7 +18,7 @@ import logging
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "83.96.176.30"

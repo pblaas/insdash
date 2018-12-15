@@ -61,9 +61,11 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="col">
-                        <input type="text" name="captcha" placeholder="Enter Captcha">
-                    </div>
+                    {% if request.cookies.get('rconpwd') %}
+                    
+                    <span><input type="text" name="captcha" placeholder="Captcha code"></span>
+                    
+                    {% endif %}
                     <div class="col">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="kick"
@@ -166,12 +168,12 @@
 
                     <div>
                         {% if request.cookies.get('rconpwd') %}
-                        <div class="col captcha">
-                            <input type="text" name="captcha" placeholder="Captcha Code">
-                        </div>
+                       
+                        <span><input type="text" name="captcha" placeholder="Captcha Code"></span>
+                       
                         <button type="submit" class="btn btn-outline-success btn-sm btn-block">Change</button>
                         {% else %}
-                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No
+                        <button type="submit" disabled="disabled" class="btn btn-outline-danger btn-sm btn-block disabled">No
                             password</button>
                         {% endif %}
                     </div>
@@ -189,12 +191,12 @@
                     </div>
                     <div>
                         {% if request.cookies.get('rconpwd') %}
-                        <div class="col captcha">
-                            <input type="text" name="captcha" placeholder="Captcha Code">
-                        </div>
+                        
+                        <span><input type="text" name="captcha" placeholder="Captcha Code"></span>
+                        
                         <button type="submit" class="btn btn-outline-success btn-sm btn-block">Send</button>
                         {% else %}
-                        <button type="submit" disabled="disabled" class="btn btn-outline-success btn-sm btn-block disabled">No
+                        <button type="submit" disabled="disabled" class="btn btn-outline-danger btn-sm btn-block disabled">No
                             password</button>
                         {% endif %}
                     </div>
@@ -213,9 +215,7 @@
                         <input type="text" class="form-control" id="rconport" name="rconport" value="27015">
                     </div>
                     <div>
-                        <div class="col captcha">
-                            <input type="text" name="captcha" placeholder="Captcha Code">
-                        </div>
+                        <span><input type="text" name="captcha" placeholder="Captcha Code"></span>
                         <button type="submit" class="btn btn-outline-success btn-sm btn-block">Update</button>
                     </div>
                 </form>
