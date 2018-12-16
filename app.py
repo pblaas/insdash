@@ -18,7 +18,7 @@ import logging
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "83.96.176.30"
@@ -27,10 +27,13 @@ app = Flask(__name__)
 app.secret_key = 'sakdfjasldfkj38sfkjasdaskdf'
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
+project_dir = os.path.dirname(os.path.abspath(__file__))
+database_file = "sqlite:///{}".format(os.path.join(project_dir, "insdash.db"))
+
 app.config["SECRET_KEY"] = uuid.uuid4()
 app.config['CAPTCHA_ENABLE'] = True
 app.config['CAPTCHA_NUMERIC_DIGITS'] = 5
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+app.config['SQLALCHEMY_DATABASE_URI'] = database_file
 app.config['SESSION_TYPE'] = 'sqlalchemy'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 Session(app)
