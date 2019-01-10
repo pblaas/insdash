@@ -12,5 +12,5 @@ COPY broadcast.py /app/
 COPY broadcast.txt  /app/
 WORKDIR /app
 
-CMD ["python", "app.py"]
+CMD ["python", "broadcast.py"]
 
