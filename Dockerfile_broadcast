@@ -1,0 +1,16 @@
+FROM python:2.7-alpine3.8
+
+LABEL maintainer="patrick@kite4fun.nl"
+
+RUN apk update \
+  && apk add gcc python-dev libc-dev libffi-dev openssl-dev jpeg-dev zlib-dev freetype-dev
+
+COPY requirements.txt /
+RUN pip install -r requirements.txt && mkdir /app
+
+COPY broadcast.py /app/
+COPY broadcast.txt  /app/
+WORKDIR /app
+
+CMD ["python", "broadcast.py"]
+
