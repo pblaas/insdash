@@ -159,6 +159,9 @@ h4 {
   }
   
 
+.row {
+    margin-right: auto;
+}
 .col-sm-12 {
     padding: 0;
 }
