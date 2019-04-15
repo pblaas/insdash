@@ -1,6 +1,6 @@
 {
-    "workbench.colorTheme": "Quiet Light",
-    "workbench.iconTheme": "eq-material-theme-icons-ocean",
+    "workbench.colorTheme": "Material Theme Ocean",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.fontAliasing": "antialiased",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
