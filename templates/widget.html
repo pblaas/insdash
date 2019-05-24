@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="widget content">
-                                                    {{ data["keywords"].rsplit(',')[6].rsplit(':')[1] }}
+                                                    {{ rules["GameMode_s"] }}
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        {% if "true" in data["keywords"].rsplit(',')[2].rsplit(':')[1] %}
+                                        {% if "true" in rules["MatchServer_b"] %}
                                         <div class="row">
                                             <div class="col-4">
                                                 Ranked:
@@ -95,7 +95,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="col-12">
-                                        {% if "true" in data["keywords"].rsplit(',')[7].rsplit(':')[1] %}
+                                        {% if "true" in data["Pwd_b"] %}
                                         <div class="row">
                                             <div class="col-4">
 

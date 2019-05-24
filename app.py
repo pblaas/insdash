@@ -18,7 +18,7 @@ import logging
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.0.2"
+__version__ = "1.0.4"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "83.96.176.30"
@@ -110,7 +110,15 @@ mapList = (
     "Scenario_Hideout_Firefight_West",
     "Scenario_Hideout_Push_Insurgents",
     "Scenario_Hideout_Push_Security",
-    "Scenario_Hideout_Skirmish ")
+    "Scenario_Hideout_Skirmish",
+    "Scenario_Outskirts_Checkpoint_Security",
+    "Scenario_Outskirts_Checkpoint_Insurgents",
+    "Scenario_Outskirts_Firefight_East",
+    "Scenario_Outskirts_Firefight_West",
+    "Scenario_Outskirts_Push_Insurgents",
+    "Scenario_Outskirts_Push_East",
+    "Scenario_Outskirts_Skirmish"
+)
 
 
 @app.route('/')
@@ -118,8 +126,9 @@ def home():
     try:
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % os.environ["SERVERIP"]))
         serverInfo = gs.a2s_info(server_addr)
+        serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
-        return render_template('home.html', addr=server_addr, ip=os.environ["SERVERIP"], data=serverInfo, players=serverPlayers, quote=randomQuote())
+        return render_template('home.html', addr=server_addr, ip=os.environ["SERVERIP"], data=serverInfo, players=serverPlayers, rules=serverRules, quote=randomQuote())
     except StopIteration as e:
         e = "Unable to resolve server ip."
         return render_template('error.html', error=e)
@@ -136,8 +145,9 @@ def remote(ip):
     try:
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % ip))
         serverInfo = gs.a2s_info(server_addr)
+        serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
-        return render_template('remote.html', addr=server_addr, ip=ip, data=serverInfo, players=serverPlayers, quote=randomQuote())
+        return render_template('remote.html', addr=server_addr, ip=ip, data=serverInfo, players=serverPlayers, rules=serverRules, quote=randomQuote())
     except StopIteration as e:
         e = "Unable to resolve server ip."
         return render_template('error.html', error=e)
@@ -154,8 +164,9 @@ def widget(ip):
     try:
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % ip))
         serverInfo = gs.a2s_info(server_addr)
+        serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
-        return render_template('widget.html', addr=server_addr, ip=ip, data=serverInfo, players=serverPlayers)
+        return render_template('widget.html', addr=server_addr, ip=ip, data=serverInfo, rules=serverRules, players=serverPlayers)
     except:
         e = "Unknown error."
         return render_template('widgeterror.html', error=e)
@@ -166,8 +177,9 @@ def banner(ip):
     try:
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % ip))
         serverInfo = gs.a2s_info(server_addr)
+        serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
-        return render_template('banner.html', addr=server_addr, ip=ip, data=serverInfo, players=serverPlayers)
+        return render_template('banner.html', addr=server_addr, ip=ip, data=serverInfo, rules=serverRules, players=serverPlayers)
     except:
         e = "Unknown error."
         return render_template('bannererror.html', error=e)
@@ -192,8 +204,9 @@ def rcon(ip):
 
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % ip))
         serverInfo = gs.a2s_info(server_addr)
+        serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
-        return render_template('rcon.html', addr=server_addr[0], ip=ip, data=serverInfo, players=serverPlayers, quote=randomQuote(), maplist=mapList)
+        return render_template('rcon.html', addr=server_addr[0], ip=ip, data=serverInfo, players=serverPlayers, rules=serverRules, quote=randomQuote(), maplist=mapList)
     except StopIteration as e:
         e = "Unable to resolve server ip."
         return render_template('error.html', error=e)
