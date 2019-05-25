@@ -116,7 +116,7 @@ mapList = (
     "Scenario_Outskirts_Firefight_East",
     "Scenario_Outskirts_Firefight_West",
     "Scenario_Outskirts_Push_Insurgents",
-    "Scenario_Outskirts_Push_East",
+    "Scenario_Outskirts_Push_Security",
     "Scenario_Outskirts_Skirmish"
 )
 
