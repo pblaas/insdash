@@ -16,6 +16,8 @@
                     <div class="widget summit">
                         {% elif "Canyon" in data["map"] %}
                         <div class="widget crossing">
+                            {% elif "Compound" in data["map"] %}
+                            <div class="widget compound">
                             {% else %}
                             <div class="widget fallback">
                                 {% endif %}
