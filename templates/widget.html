@@ -18,9 +18,11 @@
                         <div class="widget crossing">
                             {% elif "Compound" in data["map"] %}
                             <div class="widget compound">
-                            {% else %}
-                            <div class="widget fallback">
-                                {% endif %}
+                                {% elif "Ministry" in data["map"] %}
+                                <div class="widget ministry">
+                                {% else %}
+                                <div class="widget fallback">
+                                    {% endif %}
 
                                 <div class="wservername">
                                     {{ data["name"] }}

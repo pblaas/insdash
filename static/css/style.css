@@ -334,6 +334,12 @@ h4 {
     border: none;
 }
 
+.widget.ministry {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/static/fullthumb_ministry.jpg);
+    background-size: cover;
+    border: none;
+}
+
 .widget.fallback {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/static/fullthumb_fallback.jpg);
     background-size: cover;
@@ -400,6 +406,11 @@ h4 {
 }
 .banner.compound {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/static/banner_outskirts.jpg);
+    border: none;
+}
+
+.banner.ministry {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/static/banner_ministry.jpg);
     border: none;
 }
 
