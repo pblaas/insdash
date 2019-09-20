@@ -18,7 +18,7 @@ import logging
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.0.8"
+__version__ = "1.0.9"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "83.96.176.30"
@@ -129,7 +129,15 @@ mapList = (
     "Scenario_Ministry_Checkpoint_Insurgents",
     "Scenario_Ministry_Firefight_A",
     "Scenario_Ministry_Skirmish",
-    "Scenario_Ministry_Team_Deathmatch"
+    "Scenario_Ministry_Team_Deathmatch",
+    "Scenario_Hillside_Checkpoint_Security",
+    "Scenario_Hillside_Checkpoint_Insurgents",
+    "Scenario_Hillside_Firefight_East",
+    "Scenario_Hillside_Firefight_West",
+    "Scenario_Hillside_Push_Insurgents",
+    "Scenario_Hillside_Push_Security",
+    "Scenario_Hillside_Skirmish",
+    "Scenario_Hillside_Team_Deathmatch"
 )
 
 

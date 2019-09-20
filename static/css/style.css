@@ -340,6 +340,12 @@ h4 {
     border: none;
 }
 
+.widget.hillside {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/static/fullthumb_hillside.jpg);
+    background-size: cover;
+    border: none;
+}
+
 .widget.fallback {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/static/fullthumb_fallback.jpg);
     background-size: cover;
@@ -414,6 +420,10 @@ h4 {
     border: none;
 }
 
+.banner.hillside {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/static/banner_hillside.jpg);
+    border: none;
+}
 .banner.fallback {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/static/banner_fallback.jpg);
     border: none;
