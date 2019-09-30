@@ -95,11 +95,31 @@
                                             <div class="col-4">
                                                 Ranked:
                                             </div>
-                                            <div class="col-2"> <span class="oi oi-minus red"></span>
+                                            <div class="col-2"> <span class="oi oi-ellipses red"></span>
                                             </div>
                                         </div>
                                         {% endif %}
                                     </div>
+                                    <div class="col-12">
+                                            {% if "true" in rules["Mutated_b"] %}
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    Mutators:
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="oi oi-check green"></span>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    Mutators:
+                                                </div>
+                                                <div class="col-2"> <span class="oi oi-ellipses green"></span>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        </div>                                    
                                     <div class="col-12">
                                         {% if "true" in data["Pwd_b"] %}
                                         <div class="row">

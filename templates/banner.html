@@ -44,7 +44,7 @@
                     {% if "true" in rules["RankedServer_b"] %}
                     Ranked: <span class="oi oi-check green"></span>
                     {% else %}
-                    Ranked: <span class="oi oi-minus red"></span>
+                    Ranked: <span class="oi oi-ellipses red"></span>
                     {% endif %}
                 </div>
                 <div class="col-6">
@@ -58,6 +58,23 @@
                     </div>
                 </div>
                 <div class="col-6">
+                        {% if "true" in rules["Mutated_b"] %}
+                        Mutated: <span class="oi oi-check green"></span>
+                        {% else %}
+                        Mutated: <span class="oi oi-ellipses green"></span>
+                        {% endif %}
+                </div>
+                <div class="col-6">
+                        <div class="row">
+                            <div class="col-2">
+                                Ping:
+                            </div>
+                            <div class="col-4">
+                                <div class="banner content">{{ data["_ping"] | round | int }}</div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-6">
                     {% if "true" in data["Pwd_b"] %}
                     Password: <span class="oi oi-lock-locked red"></span>
                     {% else %}
@@ -65,31 +82,19 @@
                     {% endif %}
                 </div>
                 <div class="col-6">
-                    <div class="row">
-                        <div class="col-2">
-                            Ping:
+                        <div class="row">
+                            <div class="col-2">
+                                Players:
+                            </div>
+                            <div class="col-4">
+                                <div class="banner content"> {{ data["players"] }} / {{ data["max_players"] }}</div>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <div class="banner content">{{ data["_ping"] | round | int }}</div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-6">
                     Connect: <a href="steam://connect/{{ addr[0] }}:{{ addr[1] }}"><span class="oi oi-bolt"></span>
                     </a>
                 </div>
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-2">
-                            Players:
-                        </div>
-                        <div class="col-4">
-                            <div class="banner content"> {{ data["players"] }} / {{ data["max_players"] }}</div>
-                        </div>
-                    </div>
-                </div>
-
-
 
             </div>
         </div>

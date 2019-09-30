@@ -65,6 +65,9 @@
         Ranked
       </div>
       <div class="col">
+        Mutators
+      </div>
+      <div class="col">
         Connect
       </div>
       <div class="col">
@@ -97,9 +100,16 @@
         {% if "true" in rules["RankedServer_b"] %}
         <span class="oi oi-check green"></span>
         {% else %}
-        <span class="oi oi-minus red"></span>
+        <span class="oi oi-ellipses red"></span>
         {% endif %}
       </div>
+      <div class="col">
+          {% if "true" in rules["Mutated_b"] %}
+          <span class="oi oi-check green"></span>
+          {% else %}
+          <span class="oi oi-ellipses green"></span>
+          {% endif %}
+        </div>
       <div class="col">
         <a href="steam://connect/{{ addr[0] }}:{{ addr[1] }}"><span class="oi oi-bolt"></span> </a>
       </div>
