@@ -1,4 +1,4 @@
-FROM python:2.7-alpine3.11
+FROM python:3.6-alpine
 
 LABEL maintainer="patrick@kite4fun.nl"
 
