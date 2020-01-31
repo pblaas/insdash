@@ -1,24 +1,20 @@
 from steam import game_servers as gs
-from flask import Flask, jsonify, request, render_template, url_for, flash, redirect, make_response
+from flask import Flask, request, render_template, url_for, flash, make_response
 from flask_session import Session
 from flask_session_captcha import FlaskSessionCaptcha
-from urllib2 import Request
 import valve.rcon
-import sys
-import errno
 import os
 import random
 import socket
 import time
 import uuid
-import logging
 
 
 # import the flask extension
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.0.11"
+__version__ = "1.1.0"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "0.0.0.0"
@@ -148,7 +144,7 @@ def home():
     try:
         if "0.0.0.0" in os.environ["SERVERIP"]:
             return render_template('homedefault.html', version=__version__)
-        
+
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % os.environ["SERVERIP"]))
         serverInfo = gs.a2s_info(server_addr)
         serverRules = gs.a2s_rules(server_addr)
