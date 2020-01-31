@@ -18,10 +18,10 @@ import logging
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.0.10"
+__version__ = "1.0.11"
 
 if "SERVERIP" not in os.environ:
-    os.environ["SERVERIP"] = "83.96.176.30"
+    os.environ["SERVERIP"] = "0.0.0.0"
 
 app = Flask(__name__)
 app.secret_key = 'sakdfjasldfkj38sfkjasdaskdf'
@@ -64,10 +64,12 @@ def randomQuote():
         "Yeah I just pissed myself.",
         "I'M PINNED!",
         "I'M BEING SUPPRESSED!",
+        "No MAN, NO!",
         "Yeah he's fucking dead!"
     )
     index = random.randint(0, len(list) - 1)
     return list[index].upper()
+
 
 # MapList
 mapList = (
@@ -144,6 +146,9 @@ mapList = (
 @app.route('/')
 def home():
     try:
+        if "0.0.0.0" in os.environ["SERVERIP"]:
+            return render_template('homedefault.html', version=__version__)
+        
         server_addr = next(gs.query_master(r'\appid\581320\gameaddr\%s' % os.environ["SERVERIP"]))
         serverInfo = gs.a2s_info(server_addr)
         serverRules = gs.a2s_rules(server_addr)
@@ -155,7 +160,7 @@ def home():
     except socket.timeout as e:
         e = "Unable to resolve server ip."
         return render_template('error.html', error=e)
-    except:
+    except:  # noqa
         e = "Unknown error."
         return render_template('error.html', error=e)
 
@@ -174,7 +179,7 @@ def remote(ip):
     except socket.timeout as e:
         e = "Unable to resolve server ip."
         return render_template('error.html', error=e)
-    except:
+    except:  # noqa
         e = "Unknown error."
         return render_template('error.html', error=e)
 
@@ -187,7 +192,7 @@ def widget(ip):
         serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
         return render_template('widget.html', addr=server_addr, ip=ip, data=serverInfo, rules=serverRules, players=serverPlayers)
-    except:
+    except:  # noqa
         e = "Unknown error."
         return render_template('widgeterror.html', error=e)
 
@@ -200,7 +205,7 @@ def banner(ip):
         serverRules = gs.a2s_rules(server_addr)
         serverPlayers = gs.a2s_players(server_addr)
         return render_template('banner.html', addr=server_addr, ip=ip, data=serverInfo, rules=serverRules, players=serverPlayers)
-    except:
+    except:  # noqa
         e = "Unknown error."
         return render_template('bannererror.html', error=e)
 
@@ -233,7 +238,7 @@ def rcon(ip):
     except socket.timeout as e:
         e = "Unable to resolve server ip."
         return render_template('error.html', error=e)
-    except:
+    except:  # noqa
         e = "Unknown error."
         return render_template('error.html', error=e)
 
@@ -258,7 +263,7 @@ def rconengine():
                         time.sleep(5)
                         rcon.execute("travelscenario " + request.form.get('mapname'), block=False, timeout=5)
                         flash(u'Switching map to: ' + request.form.get('mapname'), 'success')
-                except:
+                except:  # noqa
                     e = "Wrong password"
                     return render_template('error.html', error=e)
             if request.form.get('adminchat'):
@@ -268,7 +273,7 @@ def rconengine():
                     with valve.rcon.RCON(address, password) as rcon:
                         rcon.execute("say " + request.form.get('adminchat'), block=False, timeout=5)
                         flash(u'Message send: ' + request.form.get('adminchat'), 'success')
-                except:
+                except:  # noqa
                     e = "Wrong password"
                     return render_template('error.html', error=e)
             if request.form.get('gridRadios'):
@@ -287,7 +292,7 @@ def rconengine():
                             rcon.execute("permban " + request.form.get('username') + " " + request.form.get('bkreason'), block=False, timeout=5)
                             flash(u'Permanently banned ' + request.form.get('username'), 'success')
                             # rcon.execute("say user " + request.form.get('username') + " will be " + request.form.get('gridRadios'), block=False, timeout=5)
-                except:
+                except:  # noqa
                     e = "Wrong password"
                     return render_template('error.html', error=e)
             res.headers['location'] = url_for('rcon', ip=request.form['ip'])
@@ -305,6 +310,7 @@ def about():
         return render_template('about.html', version=__version__)
     except StopIteration as e:
         return render_template('error.html', error=e)
+
 
 if __name__ == '__main__':
     app.run(debug=False, threaded=True, host='0.0.0.0', port=5000)

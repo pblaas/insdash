@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="bgdefault">
+    <div>
+        <div class="container">
+            <h4>Home</h4>
+            <div class="jumbotron about">
+                Activity dashboard for Insurgency Sandstorm servers.<br />
+ 
+                <br />
+                Host your own monitoring and RCON support app by using this docker container:
+                <a href="https://hub.docker.com/r/pblaas/insdash/" target="_new">Insdash</a>
+                <br />
+                Visit newworldinteractive <a href="https://newworldinteractive.com" target="_new">here.</a>
+                <br />
+                <br />
+                Use steam forum for comments or requests <a href="https://steamcommunity.com/app/581320/discussions/1/1750106661716338774/" target="_new">here.</a>
+                <br />
+
+                <hr>
+
+                Made with <span class="oi oi-heart red"></span> by Spec.<br />
+                Dutch Recon
+                <p>
+                    Running version: {{ version }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
