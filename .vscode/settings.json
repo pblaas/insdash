@@ -4,8 +4,10 @@
     "workbench.fontAliasing": "antialiased",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
-    "python.linting.pycodestyleEnabled": true,
-    "python.linting.pycodestyleArgs": [
+    "python.linting.pycodestyleEnabled": false,
+    "python.pythonPath": "/Users/pblaas/.pyenv/versions/insdash_3.6.10/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
         "--ignore=E501" 
-    ]
+    ],
 }
