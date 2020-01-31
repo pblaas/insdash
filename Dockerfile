@@ -1,8 +1,8 @@
-FROM python:2.7-alpine3.9
+FROM python:2.7-alpine3.11
 
 LABEL maintainer="patrick@kite4fun.nl"
 
-ENV SERVERIP 83.96.176.30
+ENV SERVERIP 0.0.0.0
 
 RUN apk update \
   && apk add gcc python-dev libc-dev libffi-dev openssl-dev jpeg-dev zlib-dev freetype-dev
