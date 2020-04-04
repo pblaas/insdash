@@ -14,7 +14,7 @@ import uuid
 from flask_caching import Cache
 
 __author__ = "Patrick Blaas <patrick@kite4fun.nl>"
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 if "SERVERIP" not in os.environ:
     os.environ["SERVERIP"] = "0.0.0.0"
@@ -135,7 +135,9 @@ mapList = (
     "Scenario_Hillside_Push_Insurgents",
     "Scenario_Hillside_Push_Security",
     "Scenario_Hillside_Skirmish",
-    "Scenario_Hillside_Team_Deathmatch"
+    "Scenario_Hillside_Team_Deathmatch",
+    "Scenario_PowerPlant_Checkpoint_Security",
+    "Scenario_PowerPlant_Checkpoint_Insurgents"
 )
 
 
